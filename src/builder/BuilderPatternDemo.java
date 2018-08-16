@@ -2,7 +2,7 @@ package builder;
 
 public class BuilderPatternDemo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		// Instanciation builder
 		MealBuilder builder = new MealBuilder();
 		
@@ -27,6 +27,19 @@ public class BuilderPatternDemo {
 			.build();
 		System.out.println("Custom menu : ");
 		customMeal.displayMeal();
+		
+		// Génération / Affichage menu custom
+		MealBuilder multipleMealBuilder = new MealBuilder();
+		Meal multipleMeal = multipleMealBuilder
+			.prepareVegMeal()
+			.addItem(new Coke(), 4)
+			.addItem(new VegBurger(), 2)
+			.addItem(new ChickenBurger(), 2)
+			.addItem(new ToyCar())
+			.addItem(new Pepsi())
+			.build();
+		System.out.println("Multiple menu : ");
+		multipleMeal.displayMeal();
 	}
 
 }

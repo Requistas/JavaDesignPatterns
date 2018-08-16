@@ -1,6 +1,6 @@
 package builder;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * 
@@ -16,15 +16,13 @@ public class Meal {
     /**
      * 
      */
-    private Set<Item> items;
-    
-    
+    private List<Item> items;
 
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<Item> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 
@@ -32,20 +30,24 @@ public class Meal {
      * @return
      */
     public double getCost() {
-        // TODO implement here
-        return 0.0d;
+    	int cost = 0;
+    	
+    	for (Item item : items) {
+    		cost += item.getCost();
+    	}
+    	return cost;
     }
 
     /**
      * 
      */
     public void displayMeal() {
-    	int totalCost = 0;
+    	
         for (Item item : items) {
-			System.out.println("Item : " + item.getClass().getSimpleName() + ", Packaging : " + item.getPackaging().getClass().getSimpleName() + ", price : " + item.getCost());
-			totalCost += item.getCost();
+			System.out.println("Item : " + item.getName() + ", Packaging : " + item.getPackaging().getClass().getSimpleName() + ", price : " + item.getCost());
+			
         }
-        System.out.println("Total cost : " + totalCost + System.lineSeparator());
+        System.out.println("Total cost : " + getCost() + System.lineSeparator());
         
     }
 

@@ -1,7 +1,7 @@
 package builder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -12,13 +12,13 @@ public class MealBuilder {
      * Default constructor
      */
     public MealBuilder() {
-    	this.items = new HashSet<Item>();
+    	this.items = new ArrayList<Item>();
     }
 
     /**
      * 
      */
-    private Set<Item> items;
+    private List<Item> items;
 
     /**
      * 
@@ -50,7 +50,8 @@ public class MealBuilder {
         return meal;
     }
     
-    public MealBuilder addItem(Item item) {
+    public MealBuilder addItem(Object object) {
+    	Item item = (Item)object;
     	if(item instanceof Burger) {
     		item.setPackaging(new Wrapper());
     		if(item instanceof VegBurger) {
@@ -68,6 +69,13 @@ public class MealBuilder {
     		item = null;
     	}
     	this.items.add(item);
+    	return this;
+    }
+    
+    public MealBuilder addItem(Item item, int number) throws CloneNotSupportedException {
+    	for (int i = 0; i < number; i++) {
+			this.addItem(item.clone());
+		}
     	return this;
     }
 
